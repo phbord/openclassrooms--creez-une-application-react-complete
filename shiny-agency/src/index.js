@@ -5,12 +5,13 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './utils/style/GlobalStyle';
 import './index.css';
 import Header from './components/Header';
-import { ThemeProvider } from './utils/context';
+import { SurveyProvider, ThemeProvider } from './utils/context';
 import Footer from './components/Footer';
 
 const Home = lazy(() => import('./pages/Home/index'));
 const Survey = lazy(() => import('./pages/Survey/index'));
 const Freelances = lazy(() => import('./pages/Freelances/index'));
+const Results = lazy(() => import('./pages/Results'));
 const Error = lazy(() => import('./components/Error/index'));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,18 +20,21 @@ root.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider>
-        <GlobalStyle/>
-        <h2>Page principale</h2>
-        <Header/>
-        <Suspense fallback={<div>Chargement...</div>}>
-          <Routes>
-            <Route exact path='/' element={<Home/>}/>
-            <Route path='/survey/:questionNumber' element={<Survey/>}/>
-            <Route path='/freelances' element={<Freelances/>}/>
-            <Route path="*" element={<Error/>}/>
-          </Routes>
-        </Suspense>
-        <Footer/>
+        <SurveyProvider>
+          <GlobalStyle/>
+          <h2>Page principale</h2>
+          <Header/>
+          <Suspense fallback={<div>Chargement...</div>}>
+            <Routes>
+              <Route exact path='/' element={<Home/>}/>
+              <Route path='/survey/:questionNumber' element={<Survey/>}/>
+              <Route path='/freelances' element={<Freelances/>}/>
+              <Route path='/results' element={<Results/>}/>
+              <Route path="*" element={<Error/>}/>
+            </Routes>
+          </Suspense>
+          <Footer/>
+        </SurveyProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>
