@@ -6,14 +6,14 @@ describe('Footer', () => {
   test('Should render without crash', async () => {
     render(
       <ThemeProvider>
-        <Footer />
+        <Footer/>
       </ThemeProvider>
     )
   })
   test('Change theme', async () => {
     render(
         <ThemeProvider>
-            <Footer />
+            <Footer/>
         </ThemeProvider>
     )
     const nightModeButton = screen.getByRole('button')
